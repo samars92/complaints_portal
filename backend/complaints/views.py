@@ -11,6 +11,10 @@ update_complaint = Blueprint('update_complaint', __name__)
 
 @add_complaint.route('/add_complaint', methods=["POST"])
 def submit_complaint():
+    '''
+    this view is for complaint creation
+    :return: status
+    '''
     data = request.get_json()
     category = data['category']
     contacted = data['contactedBefore']
@@ -36,6 +40,11 @@ def submit_complaint():
 
 @get_complaints.route('/<int:user_id>/get_complaints', methods=["GET"])
 def get_user_complaints(user_id):
+    '''
+    this view is retrieve complaints per user
+    :param user_id:
+    :return: json of complaints
+    '''
     result = {}
     complaints = Complaint.query.filter(Complaint.user_id == user_id).all()
     for item in complaints:
@@ -45,6 +54,10 @@ def get_user_complaints(user_id):
 
 @get_all_complaints.route('/get_all_complaints', methods=["GET"])
 def get_user_complaints():
+    '''
+    this view to retrieve all complaints
+    :return: json of complaints
+    '''
     result = {}
     complaints = Complaint.query.all()
     for item in complaints:
@@ -54,6 +67,10 @@ def get_user_complaints():
 
 @update_complaint.route('/update_complaint', methods=["PUT"])
 def update_complaint_status():
+    '''
+    this view only updates the status of the complaint
+    :return:
+    '''
     data = request.get_json()
     complaint_id = data['complaintId']
     complaint_status = data['status']

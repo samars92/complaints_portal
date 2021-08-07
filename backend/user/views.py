@@ -2,7 +2,7 @@ from flask import Blueprint, session,abort, render_template
 from flask import json, request, jsonify, Response
 from flask_login import login_user
 from user.models import User
-from user.services import validate_user
+from services import validate_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 register = Blueprint('register', __name__)
@@ -11,6 +11,10 @@ login = Blueprint('login', __name__)
 
 @register.route('/register', methods=["POST"])
 def register_user():
+    '''
+    this view is for customer regitration
+    :return: user_id
+    '''
     data = request.get_json()
     name = data['name']
     email = data['email']
@@ -32,6 +36,10 @@ def register_user():
 
 @login.route('/login', methods=["POST"])
 def customer_login():
+    '''
+    this view is for customer login
+    :return: user_id
+    '''
     data = request.get_json()
     email = data['email']
     password = data['password']
