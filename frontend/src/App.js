@@ -9,9 +9,11 @@ import AdminLoginComponent from "./components/AdminLoginComponent";
 import UserDashboardComponent from "./components/UserDashboardComponent";
 import AdminDashboardComponent from "./components/AdminDashboardComponent";
 import AddComplaintComponent from "./components/AddComplaintComponent";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  let is_admin = localStorage.getItem('user_logged_in') == "admin"
+  let isAdmin = localStorage.getItem('user_logged_in') == "admin"
+  let isLoggedIn = localStorage.getItem('user_id') != "0"
   const logout = () => {
     localStorage.setItem('user_logged_in', '0')
     localStorage.setItem('user_id', '0')
@@ -26,7 +28,7 @@ function App() {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             { localStorage.getItem('user_logged_in') != '0'?
                 <ul className="navbar-nav ml-auto">
-                {is_admin?
+                {isAdmin?
                   <li className="nav-item">
                     <Link className="nav-link" to={"/sign-in"}>All Complaints</Link>
                   </li>
@@ -63,9 +65,12 @@ function App() {
             <Route exact path='/sign-in' component={LoginComponent} />
             <Route exact path='/admin-sign-up' component={AdminRegisterComponent} />
             <Route exact path='/admin-sign-in' component={AdminLoginComponent} />
-            <Route exact path='/user-dashboard' component={UserDashboardComponent} />
-            <Route exact path='/admin-dashboard' component={AdminDashboardComponent} />
-            <Route exact path='/add-complaint' component={AddComplaintComponent} />
+            {isLoggedIn && !isAdmin &&
+            <Route exact path='/user-dashboard' component={UserDashboardComponent} />}
+            {isLoggedIn && isAdmin &&
+            <Route exact path='/admin-dashboard' component={AdminDashboardComponent} />}
+            {isLoggedIn && !isAdmin &&
+            <Route exact path='/add-complaint' component={AddComplaintComponent} />}
           </Switch>
         </div>
       </div>
