@@ -9,7 +9,6 @@ import AdminLoginComponent from "./components/AdminLoginComponent";
 import UserDashboardComponent from "./components/UserDashboardComponent";
 import AdminDashboardComponent from "./components/AdminDashboardComponent";
 import AddComplaintComponent from "./components/AddComplaintComponent";
-import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   let isAdmin = localStorage.getItem('user_logged_in') == "admin"
