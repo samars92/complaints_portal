@@ -1,0 +1,56 @@
+import React, {useState, useEffect} from "react";
+import '../css/common.css';
+
+export default function AdminLoginComponent() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const loginUser = (e) => {
+        let dataToSend = {
+            email: email,
+            password: password
+
+        }
+        fetch('http://127.0.0.1:5000/admin_login',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend)
+          }).then(
+          (result) => {
+            if (result.ok) {
+                localStorage.setItem('user_logged_in', 'admin')
+                window.location.href = '/admin-dashboard';
+            }
+          })
+    }
+
+    return (
+            <form>
+                <h3>Log In As Admin</h3>
+
+                <div className="form-group">
+                    <label>Email address</label>
+                    <input onChange={handleEmailChange} type="email" className="form-control" placeholder="Enter email" />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input onChange={handlePasswordChange} type="password" className="form-control" placeholder="Enter password" />
+                </div>
+
+
+                <button onClick={loginUser} type="submit" className="btn btn-primary btn-block">Submit</button>
+            </form>
+        );
+}
