@@ -40,7 +40,7 @@ app.register_blueprint(update_complaint)
 
 @app.route('/')
 def index():
-    return "helloooooozzzzzzz samarrrr"
+    return "Complaints System"
 
 
 if __name__ == "__main__":
