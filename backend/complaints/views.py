@@ -1,6 +1,7 @@
 from flask import Blueprint, session,abort, render_template
 from flask import json, request, jsonify
 from complaints.models import Complaint
+from user.models import User
 
 
 add_complaint = Blueprint('add_complaint', __name__)
@@ -46,7 +47,8 @@ def get_user_complaints(user_id):
     :return: json of complaints
     '''
     result = {}
-    complaints = Complaint.query.filter(Complaint.user_id == user_id).all()
+    user = User.query.filter(User.id == user_id).first()
+    complaints = user.complaints
     for item in complaints:
         result[item.id] = {'status': item.status, 'body': item.complaint_body}
     return jsonify(result), 200

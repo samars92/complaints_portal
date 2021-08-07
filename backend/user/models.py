@@ -10,6 +10,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime)
+    complaints = db.relationship('Complaint', backref='user', lazy=True)
 
     def save(self):
         db.session.add(self)
