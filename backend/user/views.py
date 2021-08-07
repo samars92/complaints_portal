@@ -17,7 +17,7 @@ def register_user():
     password = data['password']
 
     if validate_user(email):
-        return "already register"
+        return "already registered"
 
     user = User(
         name=name,

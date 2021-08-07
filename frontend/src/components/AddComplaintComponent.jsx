@@ -44,6 +44,7 @@ export default function AddComplaintComponent() {
             window.location.href = '/user-dashboard';
           });
     }
+
     return(
         <form onSubmit={submitComplaint}>
             <h3>Add Complaint</h3>
@@ -75,7 +76,7 @@ export default function AddComplaintComponent() {
 
             <div className="form-group">
                 <label>Explain the complaint</label>
-                <textarea onChange={handleComplaintChange} name="complaint_body" rows="4" cols="40"></textarea>
+                <textarea class="form-control" onChange={handleComplaintChange} name="complaint_body" rows="4" cols="40"></textarea>
             </div>
 
             <button type="submit" className="btn btn-primary btn-block">Submit</button>

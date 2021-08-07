@@ -40,6 +40,8 @@ export default function AdminDashboardComponent() {
             setComplaints(data)
           })
       }, [setComplaints]);
+        console.log(localStorage.getItem('user_id'))
+
     return(
         <div>
             {Object.keys(complaints).length > 0 && Object.entries(complaints).map(([id, complaint], index) => {

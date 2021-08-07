@@ -28,7 +28,7 @@ def admin_signup():
     )
 
     admin_user.save()
-    return {'user': admin_user.id}, 200
+    return {'user)id': admin_user.id}, 200
 
 
 @admin_login.route('/admin_login', methods=["POST"])
@@ -42,4 +42,4 @@ def admin_signin():
         return json.dumps({'message': 'check login details'}), 400
 
     login_user(admin_user)
-    return {'user': admin_user.id}, 200
+    return {'user_id': admin_user.id}, 200
