@@ -18,14 +18,17 @@ def submit_complaint():
     complaint_body = data['complaintBody']
     user_id = data['user_id']
 
-    complaint = Complaint(
-        category=category,
-        contacted=int(contacted),
-        first_time=int(first_time),
-        complaint_body=complaint_body,
-        status="pending_resolution",
-        user_id=user_id
-    )
+    if user_id:
+        complaint = Complaint(
+            category=category,
+            contacted=int(contacted),
+            first_time=int(first_time),
+            complaint_body=complaint_body,
+            status="pending_resolution",
+            user_id=user_id
+        )
+    else:
+        return jsonify({'message': 'log in'}), 400
 
     complaint.save()
     return jsonify({'message': "added"}), 200
@@ -36,7 +39,7 @@ def get_user_complaints(user_id):
     result = {}
     complaints = Complaint.query.filter(Complaint.user_id == user_id).all()
     for item in complaints:
-        result[item.id] = item.status
+        result[item.id] = {'status': item.status, 'body': item.complaint_body}
     return jsonify(result), 200
 
 
@@ -45,7 +48,7 @@ def get_user_complaints():
     result = {}
     complaints = Complaint.query.all()
     for item in complaints:
-        result[item.id] = item.status
+        result[item.id] = {'status': item.status, 'body': item.complaint_body}
     return jsonify(result), 200
 
 

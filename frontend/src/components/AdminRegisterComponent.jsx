@@ -38,13 +38,13 @@ export default function AdminRegisterComponent() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(dataToSend)
-          }).then(
-          (result) => {
-            if (result.ok) {
+          }).then(function(response) {
+            return response.json();
+          }).then(function(response) {
                 localStorage.setItem('user_logged_in', 'admin')
+                localStorage.setItem('user_id', response.user_id)
                 window.location.href = '/admin-dashboard';
-            }
-          })
+          });
     }
 
     return (

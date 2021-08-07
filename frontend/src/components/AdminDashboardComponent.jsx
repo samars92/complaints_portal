@@ -8,6 +8,7 @@ export default function AdminDashboardComponent() {
     const [complaintStatus, setComplaintStatus] = useState('')
 
     const updateComplaint = (e) => {
+        console.log(localStorage.getItem('user_id'))
         let dataToSend = {
             complaintId: complaintId,
             status: complaintStatus,
@@ -41,23 +42,22 @@ export default function AdminDashboardComponent() {
       }, [setComplaints]);
     return(
         <div>
-            {Object.keys(complaints).length > 0 && Object.entries(complaints).map(([id, status], index) => {
+            {Object.keys(complaints).length > 0 && Object.entries(complaints).map(([id, complaint], index) => {
                 return(
                     <Card key={id} style={{ width: "22rem" }}>
                         <Card.Body>
                           <Card.Title style={{ color: "green" }}>
-                              <select data-attr={id} onChange={handleStatusChange} name="status" value={status}>
+                              <select data-attr={id} onChange={handleStatusChange} name="status" value={complaint.status}>
                                   <option value="pending_resolution">Pending Resolution</option>
                                   <option value="resolved">Resolved</option>
-                                  <option value="dismissed">Dismessed</option>
+                                  <option value="dismissed">Dismissed</option>
                               </select>
                           </Card.Title>
                           <Card.Subtitle className="mb-2 text-muted">
                               {id}
                           </Card.Subtitle>
                           <Card.Text>
-                            GeeksforGeeks provides a platform for all the students to study
-                            about all the subjects in CSE.
+                              {complaint.body}
                           </Card.Text>
                             <button onClick={updateComplaint}>Update</button>
                         </Card.Body>

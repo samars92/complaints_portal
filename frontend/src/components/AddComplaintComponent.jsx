@@ -75,7 +75,7 @@ export default function AddComplaintComponent() {
 
             <div className="form-group">
                 <label>Explain the complaint</label>
-                <textarea onChange={handleComplaintChange} name="complaint_body" rows="4" cols="50"></textarea>
+                <textarea onChange={handleComplaintChange} name="complaint_body" rows="4" cols="40"></textarea>
             </div>
 
             <button type="submit" className="btn btn-primary btn-block">Submit</button>

@@ -56,8 +56,8 @@ function App() {
         </div>
       </nav>
 
-      <div className="auth-wrapper">
-        <div className="auth-inner">
+      <div className="box-wrapper">
+        <div className="box-inner">
           <Switch>
             <Route exact path='/sign-up' component={RegisterComponent} />
             <Route exact path='/sign-in' component={LoginComponent} />
