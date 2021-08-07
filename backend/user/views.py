@@ -35,19 +35,11 @@ def customer_login():
     data = request.get_json()
     email = data['email']
     password = data['password']
-    print("wwwwwww")
-    print(email)
-    print("wwwwwww")
     user = User.query.filter(User.email == email).first()
-    print(user)
     if not user and check_password_hash(user.password, password):
-        print("22222222222222")
         return json.dumps({'message': 'check login details'}), 400
 
-    print("33333333333")
     login_user(user)
-    session['user_id'] = user.id
-    print("1111111111")
     return jsonify({'user_id': user.id}), 200
 
 

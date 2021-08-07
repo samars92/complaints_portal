@@ -53,16 +53,13 @@ def get_user_complaints():
 def update_complaint_status():
     data = request.get_json()
     complaint_id = data['complaintId']
-    print(">>>>>>>")
-    print(complaint_id)
-    print(">>>>>>>")
     complaint_status = data['status']
     updated_by = data['user_id']
 
     complaint = Complaint.query.filter(Complaint.id == complaint_id).first()
     if complaint:
         complaint.status = complaint_status
-        complaint.updated_by = 1
+        complaint.updated_by = updated_by
         complaint.save()
         return jsonify("success"), 200
 
